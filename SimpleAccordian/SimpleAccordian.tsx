@@ -1,4 +1,3 @@
-```tsx
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import styles from './styles.module.scss';
 
@@ -174,4 +173,3 @@ const SimpleAccordion: React.FC<{ content: SimpleAccordionContent }> = ({ conten
 };
 
 export default SimpleAccordion;
-```
