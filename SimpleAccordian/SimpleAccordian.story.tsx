@@ -1,4 +1,3 @@
-```tsx
 import type { Meta, StoryObj } from '@storybook/react';
 import SimpleAccordion from './SimpleAccordion';
 import type { SimpleAccordionContent } from './SimpleAccordion';
@@ -211,4 +210,3 @@ export const LongContent: Story = {
     }
   }
 };
-```
