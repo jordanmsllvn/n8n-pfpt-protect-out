@@ -1,0 +1,321 @@
+--- _herobanner.scss ---
+// Custom styles for herobanner
+
+// The non-printing variables, functions, and mixins of 00-utility/variables
+// are provided to this file via:
+//   webpack.particle.js: sass-loader.data|includePaths
+
+.herobanner {
+  @include applyV3Typography;
+  position: relative;
+  z-index: 10;
+  &__wrapper {
+    max-width: 1512px;
+    margin: 0 auto;
+    width: 100%;
+    opacity: 0;
+    &[data-animate='true'] {
+      animation: fadeDown 1s $ease-out-quint 250ms forwards;
+    }
+  }
+  &__bgimage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    overflow: hidden;
+    z-index: 0;
+    img {
+      position: relative;
+      z-index: 1;
+    }
+    @include responsive(md) {
+      max-height: 460px;
+      min-width: 100%;
+      left: -20px;
+      right: auto;
+      position: relative;
+      top: auto;
+    }
+    &:after {
+      //fade to black on right
+      position: absolute;
+      content: '';
+      display: block;
+      width: 20%;
+      height: 100%;
+      right: 0;
+      top: 0;
+      z-index: 2;
+      background: linear-gradient(
+        to right,
+        transparentize($v3-black, 1) 0%,
+        $v3-black 100%
+      );
+    }
+  }
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    max-height: 845px;
+    width: 100%;
+    padding: 60px 0;
+    height: 845px;
+    position: relative;
+    &:before {
+      position: absolute;
+      content: '';
+      display: block;
+      width: calc(100vw - var(--scrollbar-width));
+      height: 100%;
+      left: calc(50% - (50vw - (var(--scrollbar-width) / 2)));
+      top: 0;
+      background-color: $v3-black;
+      border-radius: 0px 0px 20px 20px;
+    }
+    @include responsive(md) {
+      min-height: unset;
+      height: auto;
+      padding: 20px 0;
+      border-radius: 0px 0px 18px 18px;
+      justify-content: flex-start;
+    }
+  }
+  &__content {
+    opacity: 0;
+    &[data-animate='true'] {
+      animation: fadeRight 1s $ease-out-quint 500ms forwards;
+      @include responsive(md) {
+        animation: none;
+        opacity: 1;
+      }
+    }
+    a {
+      @include a;
+    }
+    max-width: 450px;
+    position: relative;
+    .herobanner__header,
+    .herobanner__description,
+    .herobanner__feature_subtitle {
+      color: $v3-white;
+    }
+    .herobanner__header {
+      max-width: 450px;
+      margin: 0 0 10px 0;
+    }
+    .herobanner__description,
+    .herobanner__feature_subtitle {
+      max-width: 330px;
+      margin: 0;
+    }
+    .herobanner__description {
+      font-weight: 400;
+    }
+    &_wrapper {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+      width: 100%;
+      left: 0px;
+      max-height: 100%;
+      gap: 40px;
+      padding: 0 60px;
+    }
+    @include responsive(lg) {
+      &_wrapper {
+        padding: 0 40px;
+      }
+    }
+    @include responsive(md) {
+      max-width: 100%;
+      &_wrapper {
+        flex-direction: column;
+        justify-content: flex-start;
+        bottom: 30px;
+        top: 0;
+        left: 0;
+        bottom: auto;
+        width: 100%;
+        max-height: unset;
+        position: relative;
+        gap: 40px;
+        animation: none;
+        padding: 0 20px;
+        &[data-animate='true'] {
+          opacity: 0;
+          animation: fadeDown 1s $ease-out-quint 500ms forwards;
+        }
+      }
+      .herobanner__header {
+        max-width: 100%;
+        font-size: 48px;
+        line-height: 100%; /* 48px */
+        letter-spacing: -0.96px;
+        margin: 0 0 10px 0;
+      }
+      .herobanner__description,
+      .herobanner__feature_subtitle {
+        max-width: 100%;
+        font-size: 16px;
+      }
+    }
+  }
+  &__feature {
+    margin-right: 6px;
+    margin-bottom: 6px;
+    opacity: 0;
+    overflow: visible !important;
+    display: flex !important;
+    gap: 40px;
+    position: relative;
+    text-decoration: none !important;
+    max-width: 420px;
+    width: 100%;
+    height: auto;
+    min-height: 210px;
+    background-color: $v3-n800;
+    border-radius: 16px;
+    padding: 24px;
+    justify-content: space-between;
+    align-self: flex-end;
+    &[data-animate='true'] {
+      animation: fadeLeft 1s $ease-out-quint 750ms forwards;
+      @include responsive(md) {
+        animation: none;
+        opacity: 1;
+      }
+    }
+    &_content {
+      @include font();
+      width: 50%;
+    }
+    &_accent {
+      @extend %h5;
+      color: $v3-n200;
+      margin-bottom: 8px;
+    }
+    &_image {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      width: 38.7%;
+      max-height: 166px;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+    &_link {
+      @include global-elements__action-btn($color: blue);
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+    }
+    &:not(:hover) {
+      .herobanner__feature_image {
+        img {
+          transform: scale(1);
+          transition: all 350ms $ease-out-quint;
+        }
+      }
+    }
+    &:hover {
+      .herobanner__feature_image {
+        img {
+          transform: scale(1.1);
+          transition: all 350ms $ease-out-quint;
+        }
+      }
+      .herobanner__feature_link {
+        &::before {
+          transform: translateX(0%);
+        }
+        &::after {
+          transform: translateX(100%);
+        }
+      }
+    }
+    &:focus {
+      outline: 2px $v3-white solid;
+      outline-offset: 4px;
+    }
+    &::after {
+      display: none !important;
+    }
+    strong {
+      @include font();
+      color: $v3-white;
+      line-height: 120%; /* 21.6px */
+    }
+    .herobanner__description,
+    .herobanner__feature_subtitle {
+      color: $v3-white;
+      margin: 0 0 10px 0;
+    }
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top left;
+    }
+    @include responsive(md) {
+      &_accent {
+        font-size: 14px;
+      }
+      p,
+      strong {
+        font-size: 16px;
+      }
+    }
+    @include responsive(sm) {
+      max-width: 335px;
+      gap: 20px;
+      padding: 20px;
+      margin: 0;
+      &_content {
+        width: 55%;
+      }
+      &_image {
+        width: 37.6%;
+      }
+    }
+  }
+}
+
+@keyframes fadeDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+@keyframes fadeLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
+@keyframes fadeRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
